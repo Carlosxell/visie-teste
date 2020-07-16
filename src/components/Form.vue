@@ -50,12 +50,18 @@
         }
       };
     },
+    computed: {
+      checkError(val) {
+        return false;
+      }
+    },
     methods: {
       removeCharacter() {
         const { name, selected } = this.form;
 
         if (!name && !selected) { return; }
         this.$emit('removeCharacter', name.length ? name : selected);
+        this.form = { name: '', selected: '' };
       },
     }
   };
