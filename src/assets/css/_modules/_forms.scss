@@ -25,9 +25,22 @@
   @include placeholder {
     color: $color-gray;
   }
+
+  &.error {
+    border-color: red;
+  }
 }
 
 .m-input {
   @extend .m-inputPlaceholder;
 }
+
+select.m-input {
+  background-color: lighten($color-gray, 24%);
+
+  option {
+    background-color: $color-light;
+  }
+}
+
 

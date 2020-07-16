@@ -1,5 +1,8 @@
 <template>
   <div class="l-page--home">
+    <Form @removeCharacter="removeCharacter"
+          :list="charactersList"
+          v-if="charactersList.length" />
     <div class="c-grid"
          v-if="charactersList.length">
       <div class="c-grid_item"
@@ -17,12 +20,13 @@
 
 <script>
   import Character from '../components/Character';
+  import Form from '../components/Form';
   import Spinner from '../components/Spinner';
   import { getCharacthers } from '../services/character-service';
 
   export default {
     name: 'Home',
-    components: { Character, Spinner },
+    components: { Character, Form, Spinner },
     mounted() {
       this.searchCharacthers();
     },
@@ -33,6 +37,9 @@
       };
     },
     methods: {
+      removeCharacter(val) {
+        this.charactersList = this.charactersList.filter(item => (item.name !== val));
+      },
       async searchCharacthers() {
         await getCharacthers().then(val => {
           this.charactersList = val.results;
